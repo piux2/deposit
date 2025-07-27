@@ -1,31 +1,46 @@
 package main
 import (
+	"flag"
 	"fmt"
 	"net/http"
 	"os/exec"
+	"regexp"
 	"strconv"
 	"strings"
 
 	"golang.org/x/net/html"
 )
-import "regexp"
 
-var storageRe = regexp.MustCompile(`storage:\s*(\d+)`)
-var depositRe = regexp.MustCompile(`deposit:\s*(\d+)`)
+var (
+	storageRe = regexp.MustCompile(`storage:\s*(\d+)`)
+	depositRe = regexp.MustCompile(`deposit:\s*(\d+)`)
+	webURL string
+	rpcURL string
+)
+
 
 func main() {
-	baseURL := "http://127.0.0.1:8888"
-	realms, err := extractRLinks(baseURL+"/r/")
+
+	flag.StringVar(&webURL, "web", "http://localhost:8888", "Base URL of the gnoweb server")
+	flag.StringVar(&rpcURL, "rpc", "http://localhost:26657", "Base URL of the gnoland rpc node")
+	flag.Parse()
+	realms, err := extractRLinks(webURL+"/r/")
+	if err != nil { 
+		fmt.Println("Failed to extract paths:", err)
+		return
+	}
+	if len(realms) == 0 {
+		fmt.Println("No realms found")
+	}
+	printDeposit(realms)
+	println()
+	packages, err :=extractRLinks(webURL+"/p/")
 	if err != nil {
 		fmt.Println("Failed to extract paths:", err)
 		return
 	}
-	printDeposit(realms)
-	println()
-	packages, err :=extractRLinks(baseURL+"/p/")
-	if err != nil {
-		fmt.Println("Failed to extract paths:", err)
-		return
+	if len(realms) == 0 {
+		fmt.Println("No realms found")
 	}
 	printDeposit(packages)
 }
@@ -105,7 +120,7 @@ func extractRLinks(url string) ([]string, error) {
 	return links, nil
 }
 func queryStorage(path string) (int, int) {
-	cmd := exec.Command("gnokey", "query", "vm/qstorage", "--data", path)
+	cmd := exec.Command("gnokey", "query", "vm/qstorage", "-data", path,"-remote",rpcURL)
 	output, err := cmd.Output()
 	if err != nil {
 		return -1, -1

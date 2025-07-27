@@ -40,10 +40,11 @@ data: storage: 89558, deposit: 8955800
 ```
 ---
 
-Output:
+Output: with genesis_txs.jsonl loaded
+
+`go run main.go`
 
 ```
-$ go run main.go
 Path                                          Storage (byte) Deposit (ugnot)
 gno.land/r/agherasie/forms                          8858     885800
 gno.land/r/demo/art/gnoface                         4090     409000
@@ -51,7 +52,7 @@ gno.land/r/demo/art/millipede                       3126     312600
 gno.land/r/demo/atomicswap                         17486    1748600
 gno.land/r/demo/banktest                            6840     684000
 gno.land/r/demo/bar20                               9250     925000
-gno.land/r/demo/boards                             89558    8955800
+gno.land/r/demo/boards                            134683   13468300
 gno.land/r/demo/btree_dao                          15845    1584500
 gno.land/r/demo/counter                             2861     286100
 gno.land/r/demo/deep/very/deep                      2550     255000
@@ -109,7 +110,7 @@ gno.land/r/docs/safeobjects                         4703     470300
 gno.land/r/docs/source                              1719     171900
 gno.land/r/docs/txlink                              3532     353200
 gno.land/r/gfanton/gnomaze                         31226    3122600
-gno.land/r/gnoland/blog                            30493    3049300
+gno.land/r/gnoland/blog                            47022    4702200
 gno.land/r/gnoland/coins                           15805    1580500
 gno.land/r/gnoland/events                          30118    3011800
 gno.land/r/gnoland/faucet                          15645    1564500
@@ -118,7 +119,7 @@ gno.land/r/gnoland/home                             5866     586600
 gno.land/r/gnoland/monit                            8541     854100
 gno.land/r/gnoland/pages                          174214   17421400
 gno.land/r/gnoland/users                            7272     727200
-gno.land/r/gnoland/users/v1                        58655    5865500
+gno.land/r/gnoland/users/v1                        63719    6371900
 gno.land/r/gnoland/valopers                        81107    8110700
 gno.land/r/gnoland/valopers_proposal                7196     719600
 gno.land/r/gov/dao                                 34031    3403100
@@ -157,7 +158,7 @@ gno.land/r/sys/names                                7306     730600
 gno.land/r/sys/params                              14327    1432700
 gno.land/r/sys/rewards                              1023     102300
 gno.land/r/sys/txfees                               2475     247500
-gno.land/r/sys/users                              584930   58493000
+gno.land/r/sys/users                              615903   61590300
 gno.land/r/sys/validators/v2                       16307    1630700
 gno.land/r/ursulovic/registry                       8444     844400
 gno.land/r/x/benchmark/storage                     22820    2282000
@@ -167,11 +168,11 @@ gno.land/r/x/skip_height_to_skip_time               1071     107100
 
 ========== Totals ==========
 Paths counted: 119
-Total storage: 2914365 byte
-Total deposit: 291436500 ugnot
+Total storage: 3012056 byte
+Total deposit: 301205600 ugnot
 ========== Averages ==========
-Average storage: 24490 byte
-Average deposit: 2449046 ugnot
+Average storage: 25311 byte
+Average deposit: 2531139 ugnot
 
 Path                                          Storage (byte) Deposit (ugnot)
 gno.land/p/aeddi/panictoerr                         4252     425200
@@ -309,5 +310,4 @@ Total deposit: 222512100 ugnot
 ========== Averages ==========
 Average storage: 17520 byte
 Average deposit: 1752063 ugnot
-
 ```
